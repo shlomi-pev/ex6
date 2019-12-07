@@ -16,8 +16,8 @@ def reverse_audio(wave_list):
     :param wave_list
     :return: a reverse list
     """
-    updated_list = wave_list.reverse()
-    return updated_list
+    wave_list.reverse()
+    return wave_list
 
 
 def increase_audio_speed(wave_list):
@@ -248,17 +248,19 @@ def main_menu():
                     "To compose a new wav file-     enter: '2'\n" \
                     "To exit and close the program- enter: '3'"
     choice = get_choice_from_menu(main_menu_msg, ['1', '2', '3'])
-    if choice == '1':  # edit wave file
-        wav_file = load_wave_file()
-        frame_rate = wav_file[0]
-        audio_data = wav_file[1]
-        edit_wave_menu(frame_rate, audio_data)
-    elif choice == '2':  # compose new wave file
-        instructions_list = load_compose_instructions()
-        audio_data = compose_from_lot(instructions_list, SAMPLE_RATE)
-        edit_wave_menu(SAMPLE_RATE, audio_data)
-    else:
-        return
+    while True:
+        if choice == '1':  # edit wave file
+            wav_file = load_wave_file()
+            frame_rate = wav_file[0]
+            audio_data = wav_file[1]
+            edit_wave_menu(frame_rate, audio_data)
+        elif choice == '2':  # compose new wave file
+            instructions_list = load_compose_instructions()
+            audio_data = compose_from_lot(instructions_list, SAMPLE_RATE)
+            edit_wave_menu(SAMPLE_RATE, audio_data)
+        else:
+            return
+        choice = get_choice_from_menu(main_menu_msg, ['1', '2', '3'])
 
 
 def get_choice_from_menu(menu_msg, possible_choices):
