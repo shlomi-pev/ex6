@@ -12,9 +12,9 @@ NOTES_F = {"A": 440, "B": 494, "C": 523, "D": 587,
 
 def reverse_audio(wave_list):
     """
-
-    :param wave_list
-    :return: a reverse list
+    the function reverses the audio data in the wae_list
+    :param wave_list: a list representing audio data
+    :return: the wave_list after it was reversed
     """
     wave_list.reverse()
     return wave_list
@@ -22,8 +22,9 @@ def reverse_audio(wave_list):
 
 def increase_audio_speed(wave_list):
     """
-    :param wave_list
-    :return: a updated list that represent a faster speed
+    the function increases the audio speed of the wave_list
+    :param wave_list: a list representing audio data
+    :return: an updated audio data list corresponding to an speed increase
     """
     updated_list = []
     for i in range(0, len(wave_list), 2):
@@ -33,8 +34,9 @@ def increase_audio_speed(wave_list):
 
 def decrease_audio_speed(wave_list):
     """
-    the function appends between every two items, the average item
-    :return: a updated list
+    the function decreases the audio speed of the wave_list
+    :param wave_list: a list representing audio data
+    :return: an updated audio data list corresponding to an speed decrease
     """
     if len(wave_list) == 0:
         return []
@@ -49,9 +51,10 @@ def decrease_audio_speed(wave_list):
 
 def change_single_value(little_list, indicator):
     """
-    the function receives a list of two numbers and additional number,
-    and multiplies or divides the
-     numbers on the list according to the number that in the 'indicator'
+    the function increases/decreases the volume if a given sample
+    :param little_list: a single audio sample in the form [left_val, right_val]
+    :param indicator: an indicator the indicates 1:increase 2:decrease
+    :return: a single audio sample after its volume was modified.
     """
     if indicator == 2:
         for i in range(len(little_list)):
@@ -88,8 +91,11 @@ def change_audio_volume(wave_list, indicator):
 
 def avg_function(num1, num2, num3):
     """
-    :param num1, num2 , num3
-    :return: the average of the numbers
+    the function calculates the average of num1, num2, num3.
+    :param num1:
+    :param num2:
+    :param num3:
+    :return: the numerical average of the numbers
     """
     return int((num1 + num2 + num3) / 3)
 
@@ -164,7 +170,15 @@ def compose_from_lot(instructions_list, sample_rate):
         result.extend(compose_single_note(note, int(time)))
     return result
 
+
 def edit_wave_menu(frame_rate, audio_data):
+    """
+    this function lets the user edit the wave file.
+    when the user is done it saves the file
+    :param frame_rate: the frame rate of the samples
+    :param audio_data: list of audio samples s
+    :return: None
+    """
     edit_menu_message = """Hello, please choose one of the following options
                         "To reverse audio-         enter: '1'
                         "To increase audio speed-  enter: '2'
@@ -206,6 +220,10 @@ def edit_wave_menu(frame_rate, audio_data):
 
 
 def load_wave_file():
+    """
+    this function loads a wave file from a name given by the users input
+    :return: [frame_rate, audio_data]
+    """
     wave_file_name = input("Enter the name of the wav file")
     wave_file = load_wave(wave_file_name)
     while wave_file == -1:
@@ -215,6 +233,11 @@ def load_wave_file():
 
 
 def load_compose_instructions():
+    """
+    this function loads a compose file from a file name given by the user
+    as input and returns it in a usable form.
+    :return: list of tuples: (note, time)
+    """
     instructions_file_name = input("Enter the instructions file name:")
     while not os.path.isfile(instructions_file_name):
         instructions_file_name = input("File not found, try again")
@@ -227,6 +250,11 @@ def load_compose_instructions():
 
 
 def main_menu():
+    """
+    this function displays the main menu and lets the user edit and compose
+    wave files.
+    :return: None
+    """
     main_menu_msg = """Hello, please choose one of the following options:
                     To edit an existing wav file-  enter: '1'
                     To compose a new wav file-     enter: '2'
@@ -249,6 +277,13 @@ def main_menu():
 
 
 def get_choice_from_menu(menu_msg, possible_choices):
+    """
+    this function displays a menu and asks the user to choose an option
+    from the menu
+    :param menu_msg: the message explaining the possible choices
+    :param possible_choices: a list of valid choices
+    :return: a valid option chosen by the user.
+    """
     print(menu_msg)
     choice = input()
     while choice not in possible_choices:
