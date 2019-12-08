@@ -1,0 +1,81 @@
+we used the following functions:
+
+
+main_menu():
+this function displays the main menu and lets the user choose between
+1 editing existing wav file.
+2 composing new wav file.
+3 exiting the program.
+this function calls the following functions:
+general: get_choice_from_menu
+for option 1: load_wav_file(), edit_wave_menu().
+for option 2: load_compose_instructions(), compose_from_lot(), edit_wave_menu()
+for option 3: exist the program.
+
+edit_wave_menu(frame_rate, audio_data):
+this function lets the user edit the wave file.
+the function displays a menu with the following options:
+1- reverse audio: calls reverse_audio(audio_data)
+2- increase audio speed: calls increase_audio_speed(audio_data)
+3- increase audio speed: calls decrease_audio_speed(audio_data)
+4- increase audio volume: calls change_audio_volume(audio_data, indicator)
+    with indicator set to 1 to indicate increase
+5- decrease audio volume: calls change_audio_volume(audio_data, indicator)
+    with indicator set to 2 to indicate decrease
+6- apply a low pass filter: calls low_pass_filter(audio_data)
+7- save and exit- saves the file by calling save_wave(frame_rate, audio_data,
+                                                      wave_file_name)
+
+get_choice_from_menu(menu_msg, possible_choices)
+this display a message to the user and asks for input. the function verifies
+that the input matches a valid choice and returns said choice.
+
+reverse_audio(audio_data):
+this function reverses the audio data.
+
+increase_audio_speed(audio_data):
+this function increases the audio speed.
+
+decrease_audio_speed(audio_data):
+this function decreases the audio speed.
+
+change_audio_volume(audio_data, indicator):
+this function increases/decreases the audio volume according to the given
+indicator.
+the function calls a sub function: change_single_value(little_list, indicator)
+
+change_single_value(little_list, indicator):
+this function increases/decreases the audio volume of a single sample according
+ to the given indicator.
+
+low_pass_filter(audio_data):
+this function applies a low pass filter.
+the function calls the following sub functions:
+- for the first and last samples of the audio_data than require a special case:
+append_avg(update_list, left_list, right_list)
+- for every sample in the middle of the list:
+avg_function(num1, num2, num3)
+
+append_avg(update_list, left_list, right_list):
+this function appends the average of the two given samples(left_list,
+right_list) to the updated list.
+
+avg_function(num1, num2, num3):
+this function calculates the numerical average of 3 given numbers.
+
+load_compose_instructions():
+this function asks for input from the user of a instruction_file_name.
+it then loads the given file and returns it in the form of list[tuples()]
+
+compose_from_lot(instructions_list, sample_rate):
+this function creates audio data according to the instructions_list sample_rate
+the function uses the sub function compose_single_note(note, time)
+
+compose_single_note(note, time):
+this function creates a list of audio data corresponding to the given note and
+time.
+
+
+
+
+
