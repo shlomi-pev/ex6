@@ -164,32 +164,16 @@ def compose_from_lot(instructions_list, sample_rate):
         result.extend(compose_single_note(note, int(time)))
     return result
 
-
-#
-# def test1():
-#     wave_file = load_wave("seinfeld.wav")
-#     if wave_file == -1:
-#         print("oopsy......")
-#
-#     else:
-#         frame_rate = wave_file[0]
-#         audio_data = wave_file[1]
-#         audio_data = dimming_audio(audio_data)
-#         audio_data = dimming_audio(audio_data)
-#         audio_data = dimming_audio(audio_data)
-#         audio_data = dimming_audio(audio_data)
-#         save_wave(frame_rate, audio_data, "notseinfeld.wav")
-
-
 def edit_wave_menu(frame_rate, audio_data):
-    edit_menu_message = "Hello, please choose one of the following options:\n" \
-                        "To reverse audio-         enter: '1'\n" \
-                        "To increase audio speed-  enter: '2'\n" \
-                        "To decrease audio speed-  enter: '3'\n" \
-                        "To increase audio volume- enter: '4'\n" \
-                        "To reduce audio volume-   enter: '5'\n" \
-                        "To apply low pass filter- enter: '6'\n" \
-                        "To save and exit-         enter: '7'"
+    edit_menu_message = """Hello, please choose one of the following options
+                        "To reverse audio-         enter: '1'
+                        "To increase audio speed-  enter: '2'
+                        "To decrease audio speed-  enter: '3'
+                        "To increase audio volume- enter: '4'
+                        "To reduce audio volume-   enter: '5'
+                        "To apply low pass filter- enter: '6'
+                        "To save and exit-         enter: '7
+                        """
     choice = get_choice_from_menu(edit_menu_message, ['1', '2', '3', '4',
                                                       '5', '6', '7'])
     while choice != '7':
@@ -235,7 +219,7 @@ def load_compose_instructions():
     while not os.path.isfile(instructions_file_name):
         instructions_file_name = input("File not found, try again")
     instructions_list = []
-    with open("sample1.txt", "r") as f:
+    with open(instructions_file_name, "r") as f:
         notes_list = f.read().split()
         for i in range(0, len(notes_list) - 1, 2):
             instructions_list.append((notes_list[i], notes_list[i + 1]))
@@ -243,10 +227,11 @@ def load_compose_instructions():
 
 
 def main_menu():
-    main_menu_msg = "Hello, please choose one of the following options:\n" \
-                    "To edit an existing wav file-  enter: '1'\n" \
-                    "To compose a new wav file-     enter: '2'\n" \
-                    "To exit and close the program- enter: '3'"
+    main_menu_msg = """Hello, please choose one of the following options:
+                    To edit an existing wav file-  enter: '1'
+                    To compose a new wav file-     enter: '2'
+                    To exit and close the program- enter: '3'
+                    """
     choice = get_choice_from_menu(main_menu_msg, ['1', '2', '3'])
     while True:
         if choice == '1':  # edit wave file
@@ -269,19 +254,6 @@ def get_choice_from_menu(menu_msg, possible_choices):
     while choice not in possible_choices:
         choice = input("Invalid input, please try again:")
     return choice
-
-
-#
-# def test2():
-#     insructions_LoT = []
-#     with open("sample1.txt", "r") as f:
-#         notes_list = f.read().split()
-#         for i in range(0, len(notes_list) - 1, 2):
-#             insructions_LoT.append((notes_list[i], notes_list[i + 1]))
-#
-#     audio_data = compose_from_lot(insructions_LoT)
-#     save_wave(SAMPLE_RATE, audio_data,
-#               "TETING.wav")
 
 
 if __name__ == "__main__":
